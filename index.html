@@ -12,14 +12,14 @@
   <meta property="og:title" content="EXTRA — український стрімер">
   <meta property="og:description" content="Ігри, спілкування, Quant RP з промокодом EXTRA та всі посилання на платформи стрімера.">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://example.com"> <!-- ЗАМІНИ на свій URL -->
-  <meta property="og:image" content="https://example.com/preview.jpg"> <!-- ЗАМІНИ на свій прев’ю-файл -->
+  <meta property="og:url" content="https://example.com">
+  <meta property="og:image" content="https://example.com/preview.jpg">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="EXTRA — український стрімер">
   <meta name="twitter:description" content="Ігри, живий чат, Quant RP і промокод EXTRA.">
-  <meta name="twitter:image" content="https://example.com/preview.jpg"> <!-- ЗАМІНИ -->
+  <meta name="twitter:image" content="https://example.com/preview.jpg">
 
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="favicon.png">
@@ -93,10 +93,11 @@
       inset: 0;
       background:
         radial-gradient(circle at top, rgba(255,138,216,0.5) 0, transparent 45%),
-        radial-gradient(circle at.bottom, rgba(5,3,15,0.9) 0, #05030a 55%);
+        radial-gradient(circle at bottom, rgba(5,3,15,0.9) 0, #05030a 55%);
       mix-blend-mode: soft-light;
     }
 
+    /* ХЕДЕР: напівпрозорий, ще прозоріший при скролі (добре на мобільному) */
     header {
       position: fixed;
       top: 0; left: 0; right: 0;
@@ -105,11 +106,25 @@
       align-items: center;
       justify-content: space-between;
       padding: 0 6vw;
-      background: linear-gradient(to bottom, rgba(5,3,15,0.96), rgba(5,3,15,0.85));
+      background: linear-gradient(
+        to bottom,
+        rgba(5, 3, 15, 0.86),
+        rgba(5, 3, 15, 0.78)
+      );
       backdrop-filter: blur(14px);
       border-bottom: 1px solid rgba(255,255,255,0.08);
       z-index: 10;
       animation: headerDrop 0.7s ease-out both;
+      transition: background 0.25s ease, border-color 0.25s ease;
+    }
+
+    header.header-scrolled {
+      background: linear-gradient(
+        to bottom,
+        rgba(5, 3, 15, 0.55),
+        rgba(5, 3, 15, 0.35)
+      );
+      border-bottom-color: rgba(255,255,255,0.04);
     }
 
     @keyframes headerDrop {
@@ -124,13 +139,11 @@
       max-height: 60px;
     }
 
+    /* ЛОГО: чисте підключення logoextra.png без ефектів */
     .logo img {
       display: block;
       height: 44px;
       width: auto;
-      mix-blend-mode: screen;
-      filter: drop-shadow(0 0 10px rgba(0,0,0,0.8)) brightness(1.1);
-      background: transparent;
     }
 
     nav {
@@ -330,7 +343,7 @@
       border: 1px solid var(--border-soft);
       padding: 18px 18px 20px;
       box-shadow: 0 16px 32px rgba(0,0,0,0.7);
-      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s.ease;
       position: relative;
       overflow: hidden;
     }
@@ -383,7 +396,7 @@
       color: #05030a;
       font-weight: 600;
       box-shadow: 0 14px 28px rgba(0,0,0,0.6);
-      transition: transform 0.16s ease, box-shadow 0.16s ease, filter 0.16s ease;
+      transition: transform 0.16s ease, box-shadow 0.16s ease, filter 0.16s.ease;
     }
 
     .btn:hover {
@@ -415,7 +428,7 @@
       color: #05030a;
       font-weight: 700;
       box-shadow: 0 18px 34px rgba(0,0,0,0.9);
-      transition: transform 0.18s ease, box-shadow 0.18s ease, filter 0.18s.ease;
+      transition: transform 0.18s.ease, box-shadow 0.18s.ease, filter 0.18s.ease;
     }
 
     .btn-cta:hover {
@@ -500,7 +513,7 @@
       display: flex;
       align-items: center;
       gap: 8px;
-      transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+      transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s.ease, background 0.18s.ease;
     }
 
     .link-item:hover {
@@ -1021,11 +1034,19 @@
     }
   });
 
-  // Паралакс фону
   const gtaBg = document.getElementById('gtaBg');
+  const headerEl = document.querySelector('header');
+
+  // Паралакс фону + прозорість хедера при скролі
   window.addEventListener('scroll', () => {
     const y = window.scrollY || window.pageYOffset;
     gtaBg.style.transform = `translateY(${y * -0.03}px)`;
+
+    if (y > 40) {
+      headerEl.classList.add('header-scrolled');
+    } else {
+      headerEl.classList.remove('header-scrolled');
+    }
   });
 
   // Бургер-меню
