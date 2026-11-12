@@ -24,6 +24,9 @@
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="favicon.png">
 
+  <!-- YouTube Iframe API для музики -->
+  <script src="https://www.youtube.com/iframe_api"></script>
+
   <style>
     :root {
       --bg-main: #05030a;
@@ -105,14 +108,14 @@
       align-items: center;
       justify-content: space-between;
       padding: 0 6vw;
-      background: linear-gradient(to bottom, rgba(5,3,15,0.96), rgba(5,3,15,0.85));
+      background: linear-gradient(to.bottom, rgba(5,3,15,0.96), rgba(5,3,15,0.85));
       backdrop-filter: blur(14px);
       border-bottom: 1px solid rgba(255,255,255,0.08);
       z-index: 10;
       animation: headerDrop 0.7s ease-out both;
     }
 
-    @keyframes headerDrop {
+    @keyframes.headerDrop {
       0% { transform: translateY(-30px); opacity: 0; }
       100% { transform: translateY(0); opacity: 1; }
     }
@@ -180,7 +183,7 @@
       height: 2px;
       border-radius: 999px;
       background: linear-gradient(90deg, var(--accent-pink), var(--accent-cyan));
-      transition: transform 0.2s ease, opacity 0.2s ease;
+      transition: transform 0.2s ease, opacity 0.2s.ease;
     }
 
     .burger.open .burger-line:nth-child(1) {
@@ -292,7 +295,7 @@
     .reveal {
       opacity: 0;
       transform: translateY(24px) translateZ(0);
-      transition: opacity .6s ease, transform .6s ease;
+      transition: opacity .6s ease, transform .6s.ease;
     }
     .reveal.visible { opacity: 1; transform: translateY(0) translateZ(0); }
 
@@ -383,7 +386,7 @@
       color: #05030a;
       font-weight: 600;
       box-shadow: 0 14px 28px rgba(0,0,0,0.6);
-      transition: transform 0.16s.ease, box-shadow 0.16s ease, filter 0.16s ease;
+      transition: transform 0.16s ease, box-shadow 0.16s ease, filter 0.16s.ease;
     }
 
     .btn:hover {
@@ -415,7 +418,7 @@
       color: #05030a;
       font-weight: 700;
       box-shadow: 0 18px 34px rgba(0,0,0,0.9);
-      transition: transform 0.18s ease, box-shadow 0.18s.ease, filter 0.18s.ease;
+      transition: transform 0.18s ease, box-shadow 0.18s.ease, filter 0.18s ease;
     }
 
     .btn-cta:hover {
@@ -500,7 +503,7 @@
       display: flex;
       align-items: center;
       gap: 8px;
-      transition: transform 0.18s.ease, box-shadow 0.18s.ease, border-color 0.18s ease, background 0.18s.ease;
+      transition: transform 0.18s.ease, box-shadow 0.18s ease, border-color 0.18s ease, background 0.18s.ease;
     }
 
     .link-item:hover {
@@ -572,7 +575,7 @@
       background: rgba(5,3,20,0.95);
       border: 1px solid rgba(255,255,255,0.2);
       padding: 14px 16px;
-      box_shadow: 0 16px 32px rgba(0,0,0,0.8);
+      box-shadow: 0 16px 32px rgba(0,0,0,0.8);
     }
 
     .collab-title {
@@ -672,6 +675,28 @@
       opacity: 0.6;
     }
 
+    /* Кнопка музики */
+    #musicToggle {
+      position: fixed;
+      right: 16px;
+      bottom: 16px;
+      z-index: 20;
+      padding: 8px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.3);
+      background: rgba(5,3,20,0.9);
+      color: var(--text-main);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      cursor: pointer;
+    }
+
+    #musicToggle:hover {
+      border-color: rgba(255,255,255,0.6);
+      background: rgba(5,3,20,1);
+    }
+
     @media (max-width: 900px) {
       .grid-2 { grid-template-columns: 1fr; }
       header { padding-inline: 16px; }
@@ -680,6 +705,10 @@
       .promo-box { max-width: 100%; }
       .promo-media img { width: 60%; }
       .burger { display: flex; }
+      #musicToggle {
+        right: 12px;
+        bottom: 12px;
+      }
     }
   </style>
 </head>
@@ -887,6 +916,15 @@
                 <span class="link-value">quant5.com.ua</span>
               </span>
             </a>
+
+            <!-- Музика для фону з YouTube (лінк) -->
+            <a class="link-item" href="https://www.youtube.com/watch?v=xZiSW0rI_9Y" target="_blank">
+              <span class="link-icon"><img src="yt.png" alt="YouTube"></span>
+              <span class="link-text">
+                <span class="link-label">Музика для фону</span>
+                <span class="link-value">відкрити трек на YouTube</span>
+              </span>
+            </a>
           </div>
         </div>
 
@@ -930,6 +968,12 @@
 </main>
 
 <footer></footer>
+
+<!-- Прихований контейнер для YouTube-плеєра -->
+<div id="ytPlayerContainer" style="width:0;height:0;overflow:hidden;"></div>
+
+<!-- Кнопка керування музикою -->
+<button id="musicToggle">Музика: Off</button>
 
 <script>
   // Reveal animation
@@ -986,6 +1030,51 @@
       mobileNav.classList.remove('open');
     });
   });
+
+  // YouTube музика: створення плеєра
+  let ytPlayer;
+  let ytReady = false;
+  let musicOn = false;
+
+  function onYouTubeIframeAPIReady() {
+    ytPlayer = new YT.Player('ytPlayerContainer', {
+      height: '0',
+      width: '0',
+      videoId: 'xZiSW0rI_9Y',
+      playerVars: {
+        autoplay: 0,
+        controls: 0,
+        loop: 1,
+        playlist: 'xZiSW0rI_9Y'
+      },
+      events: {
+        'onReady': () => { ytReady = true; }
+      }
+    });
+  }
+
+  // Кнопка On/Off музики
+  const musicToggle = document.getElementById('musicToggle');
+
+  if (musicToggle) {
+    musicToggle.addEventListener('click', async () => {
+      if (!ytReady || !ytPlayer || !ytPlayer.playVideo) return;
+
+      try {
+        if (!musicOn) {
+          ytPlayer.playVideo();
+          musicOn = true;
+          musicToggle.textContent = 'Музика: On';
+        } else {
+          ytPlayer.pauseVideo();
+          musicOn = false;
+          musicToggle.textContent = 'Музика: Off';
+        }
+      } catch (e) {
+        console.warn('Не вдалося керувати YouTube аудіо:', e);
+      }
+    });
+  }
 </script>
 </body>
 </html>
