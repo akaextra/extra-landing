@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <title>EXTRA | Стрімер</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- SEO -->
+  <meta name="description" content="EXTRA — український стрімер. Ігри, спілкування, Quant RP з промокодом EXTRA та всі актуальні посилання в одному місці.">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="EXTRA — український стрімер">
+  <meta property="og:description" content="Ігри, спілкування, Quant RP з промокодом EXTRA та всі посилання на платформи стрімера.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://example.com"> <!-- ЗАМІНИ на свій URL -->
+  <meta property="og:image" content="https://example.com/preview.jpg"> <!-- ЗАМІНИ на свій прев’ю-файл -->
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="EXTRA — український стрімер">
+  <meta name="twitter:description" content="Ігри, живий чат, Quant RP і промокод EXTRA.">
+  <meta name="twitter:image" content="https://example.com/preview.jpg"> <!-- ЗАМІНИ -->
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="favicon.png">
+
+  <style>
+    :root {
+      --bg-main: #05030a;
+      --bg-card: rgba(9, 5, 24, 0.96);
+      --bg-card-soft: rgba(9, 5, 20, 0.9);
+      --accent-pink: #ff5bbd;
+      --accent-cyan: #41f3ff;
+      --accent-yellow: #ffd166;
+      --accent-mint: #66ffcc;
+      --text-main: #fdfdff;
+      --text-muted: #d4d6f0;
+      --border-soft: rgba(255,255,255,0.12);
+      --radius: 16px;
+      --header-h: 70px;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg-main);
+      color: var(--text-main);
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+      opacity: 0.35;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .gta-bg {
+      position: fixed;
+      inset: 0;
+      z-index: -3;
+      overflow: hidden;
+      pointer-events: none;
+      will-change: transform;
+      transition: transform 0.2s ease-out;
+      background: #05030a;
+    }
+
+    .gta-bg-image {
+      position: absolute;
+      inset: 0;
+      background-image: url("palm.png");
+      background-size: cover;
+      background-position: center 65%;
+      filter: saturate(1.15) contrast(1.05);
+      transform: scale(1.03);
+      opacity: 0.9;
+    }
+
+    .gta-bg-overlay {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at top, rgba(255,138,216,0.5) 0, transparent 45%),
+        radial-gradient(circle at bottom, rgba(5,3,15,0.9) 0, #05030a 55%);
+      mix-blend-mode: soft-light;
+    }
+
+    header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: var(--header-h);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 6vw;
+      background: linear-gradient(to bottom, rgba(5,3,15,0.96), rgba(5,3,15,0.85));
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      z-index: 10;
+      animation: headerDrop 0.7s ease-out both;
+    }
+
+    @keyframes headerDrop {
+      0% { transform: translateY(-30px); opacity: 0; }
+      100% { transform: translateY(0); opacity: 1; }
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      max-height: 60px;
+    }
+
+    .logo img {
+      display: block;
+      height: 44px;
+      width: auto;
+      mix-blend-mode: screen;
+      filter: drop-shadow(0 0 10px rgba(0,0,0,0.8));
+    }
+
+    nav {
+      display: flex;
+      gap: 18px;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+    }
+
+    nav a {
+      color: var(--text-muted);
+      text-decoration: none;
+      position: relative;
+      padding-bottom: 2px;
+      transition: color .2s ease;
+    }
+
+    nav a::after {
+      content: "";
+      position: absolute;
+      left: 0; bottom: 0;
+      width: 0; height: 1px;
+      background: linear-gradient(90deg, var(--accent-pink), var(--accent-cyan));
+      transition: width .2s ease;
+    }
+
+    nav a:hover { color: var(--text-main); }
+    nav a:hover::after { width: 100%; }
+
+    .status {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.15);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      background: rgba(9,5,24,0.95);
+      cursor: pointer;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .status:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 0 16px rgba(0,0,0,0.8);
+    }
+
+    .status-dot {
+      width: 9px; height: 9px; border-radius: 50%;
+    }
+
+    .status.live .status-dot {
+      background: #ff3b58;
+      box-shadow: 0 0 8px rgba(255,59,88,0.9);
+      animation: pulse 1.4s infinite;
+    }
+
+    .status.offline .status-dot {
+      background: #6a7397;
+      box-shadow: 0 0 5px rgba(106,115,151,0.9);
+    }
+
+    .status span:last-child { font-weight: 600; color: #fff; }
+
+    @keyframes pulse {
+      0% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.5); opacity: 0.4; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    main { padding-top: var(--header-h); }
+
+    section {
+      padding: 40px 6vw 60px;
+      scroll-margin-top: calc(var(--header-h) + 10px);
+      position: relative;
+      z-index: 1;
+    }
+
+    section::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at top, rgba(5,3,15,0.9), rgba(5,3,15,0.96));
+      opacity: 0.45;
+      z-index: -1;
+    }
+
+    .wrap { max-width: 1000px; margin: 0 auto; }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px) translateZ(0);
+      transition: opacity .6s ease, transform .6s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0) translateZ(0); }
+
+    .section-label {
+      font-size: 12px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent-cyan);
+      margin-bottom: 6px;
+    }
+
+    .section-title {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .section-text {
+      font-size: 14px;
+      color: var(--text-main);
+      opacity: 0.96;
+      line-height: 1.7;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+      gap: 24px;
+      margin-top: 18px;
+    }
+
+    .card {
+      border-radius: var(--radius);
+      background: var(--bg-card);
+      border: 1px solid var(--border-soft);
+      padding: 18px 18px 20px;
+      box-shadow: 0 16px 32px rgba(0,0,0,0.7);
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s.ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 22px 40px rgba(0,0,0,0.9);
+      border-color: rgba(255,255,255,0.2);
+    }
+
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 14px 0 18px;
+    }
+
+    .tag {
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.18);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--text-main);
+      opacity: 0.95;
+      background: rgba(0,0,0,0.4);
+    }
+
+    .btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8px 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.2);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      text-decoration: none;
+      cursor: pointer;
+      background: linear-gradient(135deg, var(--accent-pink), var(--accent-cyan));
+      color: #05030a;
+      font-weight: 600;
+      box-shadow: 0 14px 28px rgba(0,0,0,0.6);
+      transition: transform 0.16s ease, box-shadow 0.16s ease, filter 0.16s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 18px 38px rgba(0,0,0,0.9);
+      filter: brightness(1.05);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--text-main);
+      box-shadow: none;
+      border-color: rgba(255,255,255,0.25);
+    }
+
+    .btn-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 20px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.3);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      text-decoration: none;
+      cursor: pointer;
+      background: linear-gradient(135deg, var(--accent-pink), var(--accent-cyan));
+      color: #05030a;
+      font-weight: 700;
+      box-shadow: 0 18px 34px rgba(0,0,0,0.9);
+      transition: transform 0.18s ease, box-shadow 0.18s ease, filter 0.18s.ease;
+    }
+
+    .btn-cta:hover {
+      transform: translateY(-2px) scale(1.03);
+      box-shadow: 0 22px 40px rgba(0,0,0,1);
+      filter: brightness(1.06);
+    }
+
+    .meta {
+      font-size: 12px;
+      color: var(--text-main);
+      opacity: 0.96;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .meta strong { color: var(--accent-yellow); }
+
+    .card-title {
+      font-size: 14px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      margin-bottom: 10px;
+      color: var(--text-main);
+    }
+
+    .pc-list {
+      list-style: none;
+      font-size: 13px;
+      color: var(--text-main);
+      opacity: 0.96;
+      display: grid;
+      gap: 6px;
+      position: relative;
+      z-index: 1;
+    }
+    .pc-list span { color: #fff; font-weight: 600; }
+
+    .card-setup {
+      background: var(--bg-card-soft);
+      border: 1px solid rgba(255,255,255,0.18);
+    }
+
+    .card-setup::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: url("pc.png");
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+      opacity: 0.32;
+      filter: saturate(1.1) contrast(1.05);
+      z-index: 0;
+    }
+
+    .card-setup .pc-list {
+      position: relative;
+      z-index: 1;
+      padding: 4px 2px 2px;
+      margin: 0;
+      border-radius: 0;
+      background: none;
+    }
+
+    .links-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .link-item {
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1px solid var(--border-soft);
+      background: rgba(0,0,0,0.6);
+      text-decoration: none;
+      color: var(--text-main);
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease, background 0.18s.ease;
+    }
+
+    .link-item:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 18px 32px rgba(0,0,0,0.85);
+      border-color: rgba(255,255,255,0.2);
+      background: rgba(0,0,0,0.8);
+    }
+
+    .link-icon {
+      width: 22px;
+      height: 22px;
+      border-radius: 4px;
+      overflow: hidden;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      background: rgba(0,0,0,0.4);
+      border: 1px solid rgba(255,255,255,0.16);
+    }
+
+    .link-icon img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+
+    .link-text {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      min-width: 0;
+    }
+
+    .link-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--text-muted);
+    }
+
+    .link-value {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      color: var(--text-main);
+    }
+
+    .card-support {
+      background: radial-gradient(circle at top left, rgba(255,91,189,0.22), transparent 55%),
+                  radial-gradient(circle at bottom right, rgba(65,243,255,0.22), transparent 55%),
+                  rgba(9,5,24,0.97);
+      border: 1px solid rgba(255,255,255,0.3);
+      box-shadow:
+        0 0 22px rgba(0,0,0,0.9),
+        0 0 24px rgba(255,91,189,0.3),
+        0 0 24px rgba(65,243,255,0.3);
+    }
+
+    .card-support .card-title {
+      color: #fff;
+    }
+
+    .collab-card {
+      margin-top: 16px;
+      border-radius: var(--radius);
+      background: rgba(5,3,20,0.95);
+      border: 1px solid rgba(255,255,255,0.2);
+      padding: 14px 16px;
+      box-shadow: 0 16px 32px rgba(0,0,0,0.8);
+    }
+
+    .collab-title {
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--accent-cyan);
+      margin-bottom: 6px;
+    }
+
+    .collab-text {
+      font-size: 13px;
+      color: var(--text-main);
+      opacity: 0.95;
+      line-height: 1.6;
+    }
+
+    .collab-row {
+      margin-top: 8px;
+      font-size: 13px;
+    }
+
+    .collab-row span {
+      font-weight: 600;
+      color: var(--accent-mint);
+    }
+
+    /* Промоблок */
+    .promo-box {
+      margin-top: 10px;
+      padding: 0;
+      max-width: 600px;
+      border: none;
+      background: transparent;
+      box-shadow: none;
+      font-size: 13px;
+      color: var(--text-main);
+    }
+
+    .promo-code {
+      font-weight: 700;
+      color: var(--accent-mint);
+    }
+
+    .promo-media {
+      margin-top: 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .promo-media img {
+      width: 45%;
+      max-width: 220px;
+      height: auto;
+      display: block;
+    }
+
+    .promo-note {
+      margin-top: 4px;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .promo-note a {
+      color: var(--accent-cyan);
+      text-decoration: none;
+    }
+    .promo-note a:hover {
+      text-decoration: underline;
+    }
+
+    .crypto-row {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .crypto-row-code {
+      word-break: break-all;
+    }
+
+    footer {
+      padding: 24px 6vw 36px;
+      font-size: 13px;
+      color: var(--text-muted);
+      text-align: center;
+      line-height: 1.6;
+    }
+    footer span { color: var(--accent-cyan); font-weight: 600; }
+
+    .divider {
+      max-width: 1000px;
+      margin: 0 auto;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
+      opacity: 0.6;
+    }
+
+    @media (max-width: 900px) {
+      .grid-2 { grid-template-columns: 1fr; }
+      header { padding-inline: 16px; }
+      nav { display: none; }
+      section { padding-inline: 16px; }
+      .promo-box { max-width: 100%; }
+      .promo-media img { width: 60%; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="gta-bg" id="gtaBg">
+  <div class="gta-bg-image"></div>
+  <div class="gta-bg-overlay"></div>
+</div>
+
+<header>
+  <div class="logo">
+    <img src="logoextra.png" alt="EXTRA logo">
+  </div>
+
+  <nav>
+    <a href="#home">Головна</a>
+    <a href="#about">Про мене</a>
+    <a href="#schedule">Розклад</a>
+    <a href="#links">Посилання</a>
+  </nav>
+
+  <button class="status live" id="statusBtn" type="button">
+    <span class="status-dot"></span>
+    <span>Stream</span>
+    <span id="statusText">LIVE</span>
+  </button>
+</header>
+
+<main>
+  <!-- HERO -->
+  <section id="home">
+    <div class="wrap reveal">
+      <div class="section-label">Український стрімер</div>
+      <h1 class="section-title">EXTRA — ігри, спілкування та емоції</h1>
+      <p class="section-text">
+        Я Йося ака EXTRA. Навколо своїх стрімів збираю кращих людей, граю в різні ігри
+        та намагаюсь дарувати емоції й гарний настрій кожному, хто залетів.
+        Приєднуйся — тут ти завжди свій.
+      </p>
+
+      <div class="tag-row">
+        <span class="tag">Ігри</span>
+        <span class="tag">Спілкування</span>
+      </div>
+
+      <div class="btn-row">
+        <a href="https://www.twitch.tv/extraua" target="_blank" class="btn">Дивитись стрім</a>
+        <a href="#links" class="btn btn-ghost">Усі посилання</a>
+      </div>
+
+      <div class="meta">
+        <span>Статус: <strong id="inlineStatus">LIVE</strong></span>
+        <span>Формат: <strong>Ігри + живий чат</strong></span>
+        <span>Мова: <strong>Українська</strong></span>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ABOUT + PC + COLLAB -->
+  <section id="about">
+    <div class="wrap reveal">
+      <div class="grid-2">
+        <div>
+          <div class="section-label">Про мене</div>
+          <h2 class="section-title">Йося ака EXTRA</h2>
+          <p class="section-text">
+            Моє завдання просте: створити місце, куди хочеться повертатись. Я граю в різні ігри,
+            спілкуюсь з чатом і роблю так, щоб після стріму ти виходив з кращим настроєм, ніж зайшов.
+            Дякую всім, хто вже поруч — саме ви робите EXTRA живим і особливим.
+          </p>
+
+          <div class="collab-card">
+            <div class="collab-title">Співпраця / реклама</div>
+            <p class="collab-text">
+              Відкритий до пропозицій щодо інтеграцій, спільних проєктів та реклами,
+              яка підходить по вайбу каналу та аудиторії.
+            </p>
+            <p class="collab-row" style="margin-top:6px;">
+              <span>Mail:</span> josephlazoriak@gmail.com
+            </p>
+            <p class="collab-row">
+              <span>Telegram:</span> @extrastreamer
+            </p>
+          </div>
+        </div>
+
+        <div class="card card-setup">
+          <div class="card-title">Мій ПК / стрім сетап</div>
+          <ul class="pc-list">
+            <li><span>GPU:</span> RTX 3060 12GB</li>
+            <li><span>CPU:</span> AMD RYZEN 7 7800X3D</li>
+            <li><span>RAM:</span> FURY BEAST 32GB | 6000</li>
+            <li><span>Mouse:</span> MCHOSE K7 ULTRA</li>
+            <li><span>Keyboard:</span> HYPERX</li>
+            <li><span>Webcam:</span> LOGITECH STREAMCAM</li>
+            <li><span>Microphone:</span> FIFINE AM8</li>
+            <li><span>Chair:</span> ANDA SEAT T-PRO 2</li>
+            <li><span>Monitors:</span> SAMSUNG 24" 144Гц | GIGABYTE 27" 144Гц</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- SCHEDULE -->
+  <section id="schedule">
+    <div class="wrap reveal">
+      <div class="section-label">Розклад</div>
+      <h2 class="section-title">Стріми з 21:00</h2>
+      <p class="section-text">
+        Основний старт стрімів — о 21:00 (UTC+2, Київ). Дні та формат можуть змінюватися,
+        але вечірній час залишається орієнтиром, щоб ти знав, коли залітати на трансляцію.
+        Актуальні анонси завжди є в Telegram та на Twitch.
+      </p>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- LINKS / DONATE + PROMOCODE -->
+  <section id="links">
+    <div class="wrap reveal">
+      <div class="section-label">Посилання</div>
+      <h2 class="section-title">Де знайти EXTRA</h2>
+      <p class="section-text">
+        Тут зібрані всі актуальні платформи: TikTok з кліпами, Twitch для лайвів,
+        Instagram для закулісся та Telegram з анонсами.
+      </p>
+
+      <!-- Промокод -->
+      <div class="promo-box">
+        <div>
+          Промокод на Quant RP: <span class="promo-code">EXTRA</span>
+        </div>
+        <div class="promo-media">
+          <img src="promo.png" alt="Quant RP промокод EXTRA">
+          <small class="promo-note">
+            Введи EXTRA при реєстрації на
+            <a href="https://quant5.com.ua/" target="_blank">Quant RP</a>
+          </small>
+        </div>
+      </div>
+
+      <div class="grid-2" style="margin-top:18px;align-items:flex-start;">
+        <div>
+          <div class="links-grid">
+            <a class="link-item" href="https://www.tiktok.com/@extrastreamer" target="_blank">
+              <span class="link-icon"><img src="tik.png" alt="TikTok"></span>
+              <span class="link-text">
+                <span class="link-label">TikTok</span>
+                <span class="link-value">@extrastreamer</span>
+              </span>
+            </a>
+
+            <a class="link-item" href="https://www.twitch.tv/extraua" target="_blank">
+              <span class="link-icon"><img src="twitch.png" alt="Twitch"></span>
+              <span class="link-text">
+                <span class="link-label">Twitch</span>
+                <span class="link-value">twitch.tv/extraua</span>
+              </span>
+            </a>
+
+            <a class="link-item" href="https://www.instagram.com/joe.lzrk/" target="_blank">
+              <span class="link-icon"><img src="inst.png" alt="Instagram"></span>
+              <span class="link-text">
+                <span class="link-label">Instagram</span>
+                <span class="link-value">@joe.lzrk</span>
+              </span>
+            </a>
+
+            <a class="link-item" href="https://t.me/extraUA" target="_blank">
+              <span class="link-icon"><img src="tg.png" alt="Telegram"></span>
+              <span class="link-text">
+                <span class="link-label">Telegram</span>
+                <span class="link-value">t.me/extraUA</span>
+              </span>
+            </a>
+
+            <a class="link-item" href="https://quant5.com.ua/" target="_blank">
+              <span class="link-icon"><img src="quant.png" alt="Quant RP"></span>
+              <span class="link-text">
+                <span class="link-label">Скачати Quant RP</span>
+                <span class="link-value">quant5.com.ua</span>
+              </span>
+            </a>
+          </div>
+        </div>
+
+        <div class="card card-support">
+          <div class="card-title">Підтримати стрім</div>
+
+          <a class="btn-cta" href="https://extra.donatik.ua" target="_blank">
+            <img src="donate.png" alt="Donate" style="height:16px;margin-right:6px;"> DONATE
+          </a>
+
+          <p class="section-text" style="margin-top:10px;">
+            Твоя підтримка допомагає розвивати канал: апгрейд заліза, оформлення,
+            інтерактиви й розіграші для нашого ком’юніті. Навіть маленький внесок —
+            це великий рух вперед.
+          </p>
+
+          <div style="margin-top:10px;font-size:13px;color:var(--text-main);opacity:0.96;">
+            <div class="link-label" style="color:var(--accent-mint);">КРИПТОДОНАТ (TRC-20)</div>
+            <div class="link-value" style="margin-top:4px;">
+              <span class="crypto-row">
+                <span class="link-icon"><img src="bit.png" alt="Crypto"></span>
+                <span class="crypto-row-code">TAWdiXdcCnn33QtAj4unapeSLVJrPFWWWy</span>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  Дякую кожному, хто залетів на стрім, кинув лайк, слово підтримки чи просто був поруч.
+  Ви робите <span>EXTRA</span> чимось більшим, ніж просто канал. Якщо відчуваєш наш вайб —
+  залишайся з нами, тут тобі завжди раді.
+</footer>
+
+<script>
+  const observer = new IntersectionObserver(
+    entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) e.target.classList.add('visible');
+      });
+    },
+    { threshold: 0.15 }
+  );
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  const btn = document.getElementById('statusBtn');
+  const statusText = document.getElementById('statusText');
+  const inlineStatus = document.getElementById('inlineStatus');
+  let live = true;
+
+  btn.addEventListener('click', () => {
+    live = !live;
+    if (live) {
+      btn.classList.remove('offline');
+      btn.classList.add('live');
+      statusText.textContent = 'LIVE';
+      inlineStatus.textContent = 'LIVE';
+    } else {
+      btn.classList.remove('live');
+      btn.classList.add('offline');
+      statusText.textContent = 'OFFLINE';
+      inlineStatus.textContent = 'OFFLINE';
+    }
+  });
+
+  const gtaBg = document.getElementById('gtaBg');
+  window.addEventListener('scroll', () => {
+    const y = window.scrollY || window.pageYOffset;
+    gtaBg.style.transform = `translateY(${y * -0.03}px)`;
+  });
+</script>
+</body>
+</html>
