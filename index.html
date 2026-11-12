@@ -24,9 +24,6 @@
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="favicon.png">
 
-  <!-- YouTube Iframe API для музики -->
-  <script src="https://www.youtube.com/iframe_api"></script>
-
   <style>
     :root {
       --bg-main: #05030a;
@@ -96,7 +93,7 @@
       inset: 0;
       background:
         radial-gradient(circle at top, rgba(255,138,216,0.5) 0, transparent 45%),
-        radial-gradient(circle at bottom, rgba(5,3,15,0.9) 0, #05030a 55%);
+        radial-gradient(circle at.bottom, rgba(5,3,15,0.9) 0, #05030a 55%);
       mix-blend-mode: soft-light;
     }
 
@@ -131,7 +128,6 @@
       display: block;
       height: 44px;
       width: auto;
-      /* Маскуємо чорний квадрат навколо лого */
       mix-blend-mode: screen;
       filter: drop-shadow(0 0 10px rgba(0,0,0,0.8)) brightness(1.1);
       background: transparent;
@@ -159,13 +155,12 @@
       left: 0; bottom: 0;
       width: 0; height: 1px;
       background: linear-gradient(90deg, var(--accent-pink), var(--accent-cyan));
-      transition: width .2s.ease;
+      transition: width .2s ease;
     }
 
     nav a:hover { color: var(--text-main); }
     nav a:hover::after { width: 100%; }
 
-    /* Бургер-меню */
     .burger {
       display: none;
       width: 32px;
@@ -243,7 +238,7 @@
       letter-spacing: 0.16em;
       background: rgba(9,5,24,0.95);
       cursor: pointer;
-      transition: transform 0.15s ease, box-shadow 0.15s.ease;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
     }
 
     .status:hover {
@@ -297,7 +292,7 @@
     .reveal {
       opacity: 0;
       transform: translateY(24px) translateZ(0);
-      transition: opacity .6s ease, transform .6s.ease;
+      transition: opacity .6s ease, transform .6s ease;
     }
     .reveal.visible { opacity: 1; transform: translateY(0) translateZ(0); }
 
@@ -335,7 +330,7 @@
       border: 1px solid var(--border-soft);
       padding: 18px 18px 20px;
       box-shadow: 0 16px 32px rgba(0,0,0,0.7);
-      transition: transform 0.2s ease, box-shadow 0.2s.ease, border-color 0.2s ease;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
       position: relative;
       overflow: hidden;
     }
@@ -388,7 +383,7 @@
       color: #05030a;
       font-weight: 600;
       box-shadow: 0 14px 28px rgba(0,0,0,0.6);
-      transition: transform 0.16s ease, box-shadow 0.16s ease, filter 0.16s.ease;
+      transition: transform 0.16s ease, box-shadow 0.16s ease, filter 0.16s ease;
     }
 
     .btn:hover {
@@ -420,7 +415,7 @@
       color: #05030a;
       font-weight: 700;
       box-shadow: 0 18px 34px rgba(0,0,0,0.9);
-      transition: transform 0.18s.ease, box-shadow 0.18s ease, filter 0.18s ease;
+      transition: transform 0.18s ease, box-shadow 0.18s ease, filter 0.18s.ease;
     }
 
     .btn-cta:hover {
@@ -505,7 +500,7 @@
       display: flex;
       align-items: center;
       gap: 8px;
-      transition: transform 0.18s ease, box-shadow 0.18s.ease, border-color 0.18s ease, background 0.18s.ease;
+      transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease, background 0.18s ease;
     }
 
     .link-item:hover {
@@ -605,7 +600,6 @@
       color: var(--accent-mint);
     }
 
-    /* Промоблок */
     .promo-box {
       margin-top: 10px;
       padding: 0;
@@ -677,107 +671,45 @@
       opacity: 0.6;
     }
 
-    /* Модальне вікно для музики */
-    .music-modal-backdrop {
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.7);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      z-index: 30;
-    }
-
-    .music-modal-backdrop.open {
-      display: flex;
-    }
-
-    .music-modal {
-      max-width: 320px;
-      width: 90%;
-      padding: 18px 18px 16px;
+    .music-player-box {
+      margin-top: 0;
+      padding: 14px 16px;
       border-radius: 16px;
-      background: radial-gradient(circle at top, rgba(255,91,189,0.22), transparent 55%),
-                  radial-gradient(circle at.bottom, rgba(65,243,255,0.18), transparent 55%),
-                  rgba(5,3,20,0.98);
-      border: 1px solid rgba(255,255,255,0.28);
-      box-shadow: 0 18px 40px rgba(0,0,0,0.9);
+      border: 1px solid rgba(255,255,255,0.24);
+      background: rgba(5,3,20,0.96);
+      box-shadow: 0 16px 32px rgba(0,0,0,0.8);
+      margin-bottom: 18px;
     }
 
-    .music-modal-title {
-      font-size: 14px;
+    .music-player-title {
+      font-size: 13px;
       text-transform: uppercase;
       letter-spacing: 0.16em;
-      margin-bottom: 8px;
       color: var(--accent-cyan);
+      margin-bottom: 8px;
     }
 
-    .music-modal-text {
+    .music-player-text {
       font-size: 13px;
       color: var(--text-main);
-      opacity: 0.96;
-      margin-bottom: 12px;
-      line-height: 1.6;
+      opacity: 0.95;
+      margin-bottom: 8px;
     }
 
-    .music-modal-controls {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 10px;
+    .music-player-frame {
+      position: relative;
+      width: 100%;
+      max-width: 360px;
+      aspect-ratio: 16 / 9;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.24);
     }
 
-    .music-modal-btn {
-      padding: 6px 12px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,0.3);
-      background: linear-gradient(135deg, var(--accent-pink), var(--accent-cyan));
-      color: #05030a;
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      font-weight: 600;
-      cursor: pointer;
-    }
-
-    .music-modal-btn-secondary {
-      padding: 6px 12px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,0.3);
-      background: transparent;
-      color: var(--text-main);
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      cursor: pointer;
-    }
-
-    .music-modal-volume {
-      flex: 1;
-      appearance: none;
-      height: 4px;
-      border-radius: 999px;
-      background: rgba(255,255,255,0.18);
-      outline: none;
-    }
-
-    .music-modal-volume::-webkit-slider-thumb {
-      appearance: none;
-      width: 14px;
-      height: 14px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--accent-pink), var(--accent-cyan));
-      cursor: pointer;
-      box-shadow: 0 0 10px rgba(0,0,0,0.6);
-    }
-
-    .music-modal-volume::-moz-range-thumb {
-      width: 14px;
-      height: 14px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--accent-pink), var(--accent-cyan));
-      cursor: pointer;
-      box-shadow: 0 0 10px rgba(0,0,0,0.6);
+    .music-player-frame iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
     }
 
     @media (max-width: 900px) {
@@ -788,6 +720,9 @@
       .promo-box { max-width: 100%; }
       .promo-media img { width: 60%; }
       .burger { display: flex; }
+      .music-player-frame {
+        max-width: 100%;
+      }
     }
   </style>
 </head>
@@ -817,7 +752,6 @@
       <span id="statusText">LIVE</span>
     </button>
 
-    <!-- Бургер для мобільного -->
     <button class="burger" id="burgerBtn" type="button" aria-label="Меню">
       <span class="burger-line"></span>
       <span class="burger-line"></span>
@@ -826,7 +760,6 @@
   </div>
 </header>
 
-<!-- Мобільне меню -->
 <nav class="mobile-nav" id="mobileNav">
   <a href="#home">Головна</a>
   <a href="#about">Про мене</a>
@@ -839,6 +772,23 @@
   <!-- HERO -->
   <section id="home">
     <div class="wrap reveal">
+
+      <!-- Музичний плеєр нагорі -->
+      <div class="music-player-box">
+        <div class="music-player-title">Музика для фону</div>
+        <p class="music-player-text">
+          Увімкни трек з YouTube і гортай сайт далі. Музика працює як супровід у фоні.
+        </p>
+        <div class="music-player-frame">
+          <iframe
+            src="https://www.youtube.com/embed/xZiSW0rI_9Y?rel=0"
+            title="Music for stream background"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          ></iframe>
+        </div>
+      </div>
+
       <div class="section-label">Український стрімер</div>
       <h1 class="section-title">EXTRA — ігри, спілкування та емоції</h1>
       <p class="section-text">
@@ -1025,7 +975,6 @@
     </div>
   </section>
 
-  <!-- БЛОК ПОДЯКИ НА ТЕМНОМУ ФОНІ -->
   <section>
     <div class="wrap reveal">
       <p class="section-text" style="text-align:center;">
@@ -1038,25 +987,6 @@
 </main>
 
 <footer></footer>
-
-<!-- Прихований контейнер для YouTube-плеєра -->
-<div id="ytPlayerContainer" style="width:0;height:0;overflow:hidden;"></div>
-
-<!-- Модалка для музики -->
-<div class="music-modal-backdrop" id="musicModalBackdrop">
-  <div class="music-modal">
-    <div class="music-modal-title">Музичний супровід</div>
-    <p class="music-modal-text">
-      Хочеш увімкнути фонову музику з YouTube, поки сидиш на сайті?
-      Можна налаштувати гучність нижче.
-    </p>
-    <div class="music-modal-controls">
-      <button class="music-modal-btn" id="musicPlayBtn">Увімкнути</button>
-      <input type="range" id="musicVolume" class="music-modal-volume" min="0" max="100" value="50">
-    </div>
-    <button class="music-modal-btn-secondary" id="musicCloseBtn">Ні, дякую</button>
-  </div>
-</div>
 
 <script>
   // Reveal animation
@@ -1091,7 +1021,7 @@
     }
   });
 
-  // Легкий паралакс фону
+  // Паралакс фону
   const gtaBg = document.getElementById('gtaBg');
   window.addEventListener('scroll', () => {
     const y = window.scrollY || window.pageYOffset;
@@ -1113,86 +1043,6 @@
       mobileNav.classList.remove('open');
     });
   });
-
-  // YouTube музика
-  let ytPlayer;
-  let ytReady = false;
-  let musicPlaying = false;
-
-  function onYouTubeIframeAPIReady() {
-    ytPlayer = new YT.Player('ytPlayerContainer', {
-      height: '0',
-      width: '0',
-      videoId: 'xZiSW0rI_9Y',
-      playerVars: {
-        autoplay: 0,
-        controls: 0,
-        loop: 1,
-        playlist: 'xZiSW0rI_9Y'
-      },
-      events: {
-        onReady: () => {
-          ytReady = true;
-          // Встановимо стартову гучність (50%)
-          try { ytPlayer.setVolume(50); } catch(e) {}
-        }
-      }
-    });
-  }
-
-  // Модалка музики
-  const musicModalBackdrop = document.getElementById('musicModalBackdrop');
-  const musicPlayBtn = document.getElementById('musicPlayBtn');
-  const musicCloseBtn = document.getElementById('musicCloseBtn');
-  const musicVolume = document.getElementById('musicVolume');
-
-  // Показуємо модалку при першому завантаженні
-  window.addEventListener('load', () => {
-    if (musicModalBackdrop) {
-      musicModalBackdrop.classList.add('open');
-    }
-  });
-
-  if (musicPlayBtn) {
-    musicPlayBtn.addEventListener('click', () => {
-      if (!ytReady || !ytPlayer || !ytPlayer.playVideo) return;
-      try {
-        ytPlayer.playVideo();
-        musicPlaying = true;
-        if (musicModalBackdrop) {
-          musicModalBackdrop.classList.remove('open');
-        }
-      } catch (e) {
-        console.warn('Не вдалося відтворити YouTube аудіо:', e);
-      }
-    });
-  }
-
-  if (musicCloseBtn) {
-    musicCloseBtn.addEventListener('click', () => {
-      if (musicModalBackdrop) {
-        musicModalBackdrop.classList.remove('open');
-      }
-      // Якщо музика раптом грає — поставимо на паузу
-      if (ytPlayer && ytPlayer.pauseVideo) {
-        ytPlayer.pauseVideo();
-        musicPlaying = false;
-      }
-    });
-  }
-
-  if (musicVolume) {
-    musicVolume.addEventListener('input', () => {
-      const val = parseInt(musicVolume.value, 10);
-      if (ytReady && ytPlayer && ytPlayer.setVolume) {
-        try {
-          ytPlayer.setVolume(val);
-        } catch (e) {
-          console.warn('Не вдалося змінити гучність:', e);
-        }
-      }
-    });
-  }
 </script>
 </body>
 </html>
