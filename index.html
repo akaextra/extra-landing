@@ -109,7 +109,7 @@
       backdrop-filter: blur(14px);
       border-bottom: 1px solid rgba(255,255,255,0.08);
       z-index: 10;
-      animation: headerDrop 0.7s.ease-out both;
+      animation: headerDrop 0.7s ease-out both;
     }
 
     @keyframes headerDrop {
@@ -154,7 +154,7 @@
       left: 0; bottom: 0;
       width: 0; height: 1px;
       background: linear-gradient(90deg, var(--accent-pink), var(--accent-cyan));
-      transition: width .2s.ease;
+      transition: width .2s ease;
     }
 
     nav a:hover { color: var(--text-main); }
@@ -193,7 +193,6 @@
       transform: translateY(-3px) rotate(-45deg);
     }
 
-    /* Мобільне меню */
     .mobile-nav {
       position: fixed;
       top: var(--header-h);
@@ -239,7 +238,7 @@
       letter-spacing: 0.16em;
       background: rgba(9,5,24,0.95);
       cursor: pointer;
-      transition: transform 0.15s ease, box-shadow 0.15s ease;
+      transition: transform 0.15s ease, box-shadow 0.15s.ease;
     }
 
     .status:hover {
@@ -331,7 +330,7 @@
       border: 1px solid var(--border-soft);
       padding: 18px 18px 20px;
       box-shadow: 0 16px 32px rgba(0,0,0,0.7);
-      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+      transition: transform 0.2s ease, box-shadow 0.2s.ease, border-color 0.2s ease;
       position: relative;
       overflow: hidden;
     }
@@ -355,7 +354,7 @@
       border: 1px solid rgba(255,255,255,0.18);
       font-size: 11px;
       text-transform: uppercase;
-      letter_spacing: 0.14em;
+      letter-spacing: 0.14em;
       color: var(--text-main);
       opacity: 0.95;
       background: rgba(0,0,0,0.4);
@@ -384,7 +383,7 @@
       color: #05030a;
       font-weight: 600;
       box-shadow: 0 14px 28px rgba(0,0,0,0.6);
-      transition: transform 0.16s.ease, box-shadow 0.16s ease, filter 0.16s.ease;
+      transition: transform 0.16s.ease, box-shadow 0.16s ease, filter 0.16s ease;
     }
 
     .btn:hover {
@@ -416,7 +415,7 @@
       color: #05030a;
       font-weight: 700;
       box-shadow: 0 18px 34px rgba(0,0,0,0.9);
-      transition: transform 0.18s ease, box-shadow 0.18s ease, filter 0.18s.ease;
+      transition: transform 0.18s ease, box-shadow 0.18s.ease, filter 0.18s.ease;
     }
 
     .btn-cta:hover {
@@ -573,7 +572,7 @@
       background: rgba(5,3,20,0.95);
       border: 1px solid rgba(255,255,255,0.2);
       padding: 14px 16px;
-      box-shadow: 0 16px 32px rgba(0,0,0,0.8);
+      box_shadow: 0 16px 32px rgba(0,0,0,0.8);
     }
 
     .collab-title {
@@ -725,6 +724,7 @@
   <a href="#about">Про мене</a>
   <a href="#schedule">Розклад</a>
   <a href="#links">Посилання</a>
+  <a href="https://extra.donatik.ua" target="_blank">Донат</a>
 </nav>
 
 <main>
@@ -980,7 +980,6 @@
     mobileNav.classList.toggle('open');
   });
 
-  // Закривати меню при кліку по пункту
   mobileNav.querySelectorAll('a').forEach(link => {
     link.addEventListener('click', () => {
       burgerBtn.classList.remove('open');
